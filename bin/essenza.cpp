@@ -1,42 +1,30 @@
-/**
- * @file essenza.cpp
- *
- * @version 01.01 2021516
- *
- * @brief https://training.olinfo.it/#/task/essenza/statement
- *
- * @ingroup essenza
- * (Note: this needs exactly one @defgroup somewhere)
- *
- * @author Castellani Davide
- *
- * Contact: contacts@castellanidavide.it
- *
- */
-
-// Includes
 #include <bits/stdc++.h>
 using namespace std;
+#define DEBUG
 
-// Variabiles
-int N;
+int K, N, sol;
+vector<int> value;
 
-// Main code
 int main()
 {
-  // Cncomment the following lines if you want to read/write from files
-  // freopen("input.txt", "r", stdin);
-  // freopen("output.txt", "w", stdout);
+    freopen("input.txt", "r", stdin);
+#ifndef DEBUG
+    freopen("output.txt", "w", stdout);
+#endif // DEBUG
 
-  // Input
-  cin >> N;
+    cin >> K >> N;
+    value.resize(N);
+    sol = INT_MIN;
 
-  // Code
-  // ...
+    for (size_t i = 0; i < N; ++i)
+        cin >> value[i];
 
-  // Output
-  cout << N << endl;
+    for (size_t i = 0; i < N; ++i) {
+        for (size_t j = 1; j < K + 1 && i + j < N; ++j) {
+            if (value[i + j] - value[i] > sol)
+                sol = value[i + j] - value[i];
+        }
+    }
 
-  // End
-  return 0;
+    cout << sol << endl;
 }
